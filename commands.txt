@@ -1,0 +1,29 @@
+/* Refer this link for more commands */
+https://ionicframework.com/docs/cli
+
+/* To Run ionic android on device */
+$ ionic capacitor run android --target RZ8R91M3XYN
+
+/* To create a project */
+$ ionic start [name] [template] [options]
+$ ionic start myApp blank --type=angular
+
+/* Add Platform */
+$ ionic capacitor add [platform]
+$ ionic capacitor add android
+$ ionic capacitor add ios
+
+/* Ionic Build */
+$ ionic build [options]
+$ ionic build 
+$ ionic build --prod
+$ ionic build --watch
+
+/* Capacitor Build */
+$ ionic capacitor build [platform] [options]
+$ ionic capacitor build 
+$ ionic capacitor build android
+$ ionic capacitor build ios
+
+/* Capacitor Sync commands */
+$ ionic capacitor sync [platform] [options]
