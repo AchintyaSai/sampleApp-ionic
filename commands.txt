@@ -27,3 +27,15 @@ $ ionic capacitor build ios
 
 /* Capacitor Sync commands */
 $ ionic capacitor sync [platform] [options]
+
+/* Ionic Serve */
+ionic serve
+
+/* Ionic Generate Commands */
+$ ionic generate 
+$ ionic generate page
+$ ionic generate page contact
+$ ionic generate component contact/form
+$ ionic generate component login-form --change-detection=OnPush
+$ ionic generate directive ripple --skip-import
+$ ionic generate service api/user
