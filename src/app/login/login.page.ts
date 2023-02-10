@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 import { AuthenticationService } from '../core/services/authentication.service';
+import { LocaldbService } from '../core/services/localdb.service';
 import { LoginResponseModel } from '../shared/models/response/login-response.model';
 import { LoginViewModel } from './view-models/login-view.model';
 
@@ -12,7 +15,7 @@ import { LoginViewModel } from './view-models/login-view.model';
 export class LoginPage implements OnInit {
 
   loginViewModel : LoginViewModel;
-  constructor(private authService : AuthenticationService, private toastController : ToastController) { 
+  constructor(private authService : AuthenticationService, private toastController : ToastController, private router : Router, private localDb : LocaldbService) { 
     this.loginViewModel = new LoginViewModel("","");
   }
 
@@ -22,18 +25,47 @@ export class LoginPage implements OnInit {
 
   sendLoginDetails()
   {
-    console.log(this.loginViewModel)
-    this.authService.getLoginDetails(this.loginViewModel).subscribe((resp : LoginResponseModel) => {
-      this.loginViewModel = new LoginViewModel(undefined,undefined,resp);
-      this.presentToast('bottom');
-    })
+    if(environment.isLocal)
+    {
+      let signupDetails = this.localDb.getFromLocalStorage("signupDetails");
+      if(signupDetails)
+      {
+        if(signupDetails.username != this.loginViewModel.userName)
+        {
+          this.presentToast("User details not found.")
+        }
+        else{
+          if(signupDetails.password != this.loginViewModel.password)
+            this.presentToast("Incorrect Password");
+          else
+            this.router.navigateByUrl("posts")
+        }
+      }
+      else
+      {
+        this.presentToast("User details not found.")
+      }
+
+    }
+    else
+    {
+      this.authService.getLoginDetails(this.loginViewModel).subscribe((resp : any) => {
+        this.loginViewModel = new LoginViewModel(undefined,undefined,resp);
+        this.presentToast();
+      })
+    }
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
+  navigateToSignup()
+  {
+    this.router.navigateByUrl('signup');
+  }
+
+  async presentToast(statusMessage = this.loginViewModel.statusMessage) {
     const toast = await this.toastController.create({
-      message: this.loginViewModel.statusMessage,
+      message: statusMessage ,
       duration: 1500,
-      position: position
+      position: 'bottom'
     });
 
     await toast.present();
