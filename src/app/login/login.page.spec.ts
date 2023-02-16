@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
@@ -10,7 +11,7 @@ describe('LoginPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), HttpClientModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);
@@ -20,5 +21,9 @@ describe('LoginPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
+  }); 
+  
+  it("", async() => {
+   component.navigateToSignup()
+  })
 });

@@ -4,7 +4,6 @@ import { ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { LocaldbService } from '../core/services/localdb.service';
-import { LoginResponseModel } from '../shared/models/response/login-response.model';
 import { LoginViewModel } from './view-models/login-view.model';
 
 @Component({
@@ -20,7 +19,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    
   }
 
   sendLoginDetails()

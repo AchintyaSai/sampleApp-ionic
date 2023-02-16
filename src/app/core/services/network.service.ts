@@ -38,7 +38,6 @@ export class NetworkService {
     return this.httpClient.get<Resp>(url);
   }
   private post<Req,Resp>(url: string, body? : Req): Observable<Resp> {
-    console.log(body)
     return this.httpClient.post<Resp>(url,body);
   }
   private put<Req,Resp>(url: string, body? : Req): Observable<Resp> {
