@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>sample-animation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!--In progress-->
+
+  <div class="container">
+    <div *ngFor="let card of cards" [ngClass]="back? 'card card-a card-symbol-spade' : 'card-a card flipped card-symbol-spade'" (click)="flipped()">
+      <div class="front">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="back"></div>
+    </div>
+</div>
+
+
+</ion-content>
